@@ -1,0 +1,234 @@
+***MySQL:
+SQL-Structured Query Language
+DDL(Data Definition Language)-CREATE,ALTER,DROP
+DML(Data Manupulation Language)-INSERT,SELECT,UPDATE,DELETE
+
+*SHOW DATABASES;
+*CREATE DATABASE college;
+*DROP DATABASE college;//delete database
+*CREATE TABLE student
+(
+    Roll int,
+    Name varchar(15),
+    Gender varchar(10),
+    Age int(5),
+    GPA double(3,2),//double(total digit,doshomik er por koy ghor jaabe eta)
+    City varchar(15),
+    PRIMARY KEY(Roll)
+
+);
+*RENAME TABLE student to student_details;
+*DROP TABLE student_details;//full table e delete hoye jaabe
+*TRUNCATE TABLE student_details;//table thakbe..but column er value gula delete hoye jabe shob
+
+*INSERT INTO student_details
+(Roll,Name,Gender,Age,GPA,City)
+VALUES(101,"Dibbo","Male",24,4.50,"Dhaka");
+
+*INSERT INTO student_details
+VALUES(102,"Rajib","Male",21,5.00,"Rajshahi"),
+(103,"Kammya","Feale",15,5.00,"Dhaka"),
+(104,"Anusua","Female",14,5.00,"Dhaka"),
+(105,"Puja","Female",28,4.090,"Dhaka"),
+(106,"Arka","Male",21,3.50,"Sylhet");
+
+*SELECT Name
+FROM student_details;
+*SELECT Name,Roll,GPA
+FROM student_details;
+*SELECT DISTINCT City //distinct keyword dile duplicate value show kore nah
+FROM student_details;
+* SELECT *  //here * show full data
+FROM student_details;
+*SELECT *
+FROM student_details
+Limit 4;
+*SELECT *
+FROM student_details
+Limit 2,3;//1st duita row baad diye porer tinta dekhacche
+
+*SELECT Name
+FROM student_details
+ORDER BY Name;//accending order sorting
+*SELECT Name,Age,GPA //show three column.but sorting name only
+FROM student_details
+ORDER BY Name;
+*SELECT Name,Age,GPA
+FROM student_details
+ORDER BY Name,GPA;
+*SELECT Name,Age,GPA
+FROM student_details
+ORDER BY Name DESC;//descending order sorting
+
+*SELECT 5+2;//output:7
+
+*SELECT City
+FROM student_details
+WHERE Gender="Female";
+
+*SELECT DISTINCT City
+FROM student_details
+WHERE Gender="Male"
+ORDER BY City DESC;
+
+*SELECT *
+FROM student_details
+WHERE Age>15;
+*SELECT Roll,Age,GPA
+FROM student_details
+WHERE Roll BETWEEN 103 AND 105;
+*SELECT Roll,Age,GPA
+FROM student_details
+WHERE Roll!=103;
+*SELECT *
+FROM student_details
+WHERE Gender="Male" OR GPA>=3.50;
+*SELECT *
+FROM student_details
+WHERE Gender="Male" AND GPA>=3.50;
+*SELECT *
+FROM student_details
+WHERE City="Sylhet" AND (Gender="Male" OR GPA>=3.50);
+*SELECT *
+FROM student_details
+WHERE City IN ("Dhaka","Rajshahi");//ei city gular details show korbe
+*SELECT *
+FROM student_details
+WHERE City NOT IN ("Dhaka","Rajshahi");//ei city gular baade details show korbe
+*SELECT *
+FROM student_details
+WHERE Name LIKE "A%";//jaader naam er shuru teh "A" tader show korbe
+*SELECT *
+FROM student_details
+WHERE Name LIKE "%A";//jaader naam er sheshe "A" tader show korbe
+*SELECT *
+FROM student_details
+WHERE Name LIKE "%UA%";//jaader naam er moddhe "UA" tader show korbe
+*SELECT *
+FROM student_details
+WHERE Name LIKE "_i%";//jaader naam er second character "i" tader show korbe.jotogula under score taar porer character
+*SELECT *
+FROM student_details
+WHERE Name LIKE "%s__";
+*SELECT Roll AS Id,Name as "First Name" FROM student_details;
+
+*CREATE TABLE student 
+(
+    Id int NOT NULL AUTO_INCREMENT,
+    Name varchar(15) NOT NULL,
+    PRIMARY KEY(Id)
+    
+);
+
+
+*UPDATE student
+SET Salary=50000
+WHERE Id=1000;
+
+*DELETE FROM student
+WHERE Id=1006;
+*UPDATE student
+SET Salary=Salary+5000
+WHERE Salary>=4500;
+
+**SELECT UPPER("I am Dibbo");
+*SELECT UPPER(City)//shob character uppercase hoye jabe//LOWER()
+from student_details;
+
+*SELECT CONCAT(Name, " is ", Age, " years old ") AS Student //column name change to Student and concat
+from student_details;
+*SELECT GREATEST(4,7,8);//8
+*SELECT LEAST(4,7,8);//4
+*SELECT POW(2,3);//8
+*SELECT LOG(10);
+*SELECT TRUNCATE(10.2346322,2);//10.23
+*SELECT TRUNCATE(LOG(2),2);
+*SELECT RAND();//random value dibe
+*SELECT EXP(3);//e power 3 er value dibe
+
+*DESCRIBE student;//teacher table er structure show korbe
+*SELECT COUNT(*)
+FROM student;//show amount of row
+*SELECT MAX(GPA)
+FROM student_details;
+*SELECT MIN(GPA)
+FROM student_details;
+*SELECT SUM(Salary),AVG(Salary)
+FROM student;
+
+*SELECT * FROM student
+WHERE Salary > (SELECT AVG(Salary) FROM student);//sub query
+
+*ALTER TABLE command diye new column add,column er name change and column delete kora jaay.
+*ALTER TABLE student ADD Age int(5);
+*ALTER TABLE student CHANGE Age Ages int(5);//column name change
+*ALTER TABLE student DROP COLUMN Ages;
+*ALTER TABLE student DROP COLUMNS Ages,Salary;//delete column
+
+*SELECT Department,SUM(Salary)
+FROM student
+GROUP BY Department //group by help koreh group korte..ekhane shob department ah total koto koreh salary laage..sheta dekhabe
+ORDER BY SUM(Salary) DESC;
+
+*Table joining:
+1st way:
+*SELECT student_details.ROll,Reg_Number,Name,Gender,Group_Name,GPA
+FROM student_details,exam_result
+WHERE student_details.Roll=exam_result.Roll;
+2nd way(standard):
+*SELECT sd.ROll,ex.Reg_Number,sd.Name,sd.Gender,ex.Group_Name,ex.GPA
+FROM student_details AS sd JOIN exam_result AS ex
+ON sd.Roll=ex.Roll;
+
+//INNER JOIN(dui table er just match roll gular details show korbe)
+*SELECT sd.ROll,ex.Reg_Number,sd.Name,sd.Gender,ex.Group_Name,ex.GPA
+FROM student_details AS sd INNER JOIN exam_result AS ex
+ON sd.Roll=ex.Roll;
+//LEFT JOIN(dui table er match roll gular details show korbe and left table er match charau baki details show korbe)
+*SELECT sd.ROll,ex.Reg_Number,sd.Name,sd.Gender,ex.Group_Name,ex.GPA
+FROM student_details AS sd LEFT JOIN exam_result AS ex
+ON sd.Roll=ex.Roll;
+//RIGHTT JOIN(dui table er match roll gular details show korbe and right table er match charau baki details show korbe)
+*SELECT sd.ROll,ex.Reg_Number,sd.Name,sd.Gender,ex.Group_Name,ex.GPA
+FROM student_details AS sd RIGHT JOIN exam_result AS ex
+ON sd.Roll=ex.Roll;
+
+//UNION(dui tour er data add korbe.same roll dui jaygay thakle duplicate value remove kore)
+*SELECT Roll,Name,Gender
+FROM Dhaka_tour 
+UNION
+SELECT Roll,Name,Gender
+FROM Sylhet_tour;
+//UNION ALL(dui tour er data add korbe.same roll dui jaygay thakle duplicate value remove kore na)
+*SELECT Roll,Name,Gender
+FROM Dhaka_tour 
+UNION ALL
+SELECT Roll,Name,Gender
+FROM Sylhet_tour;
+
+//VIEW(where we only show what we want to show to user )
+*CREATE VIEW student_view AS
+SELECT Roll,Name,Gender
+FROM student_details;
+*DROP VIEW student_details.
+(everything same as table)
+
+*SELECT CURDATE();//show current date
+*SELECT CURTIME();//show current time
+*SELECT NOW();//show current date and time
+*SELECT ADDDATE("2025-1-24",INTERVAL 5 DAY);//output:2025-01-29
+*SELECT ADDDATE("2025-1-24",INTERVAL 5 MONTH);//output:2025-06-24
+*SELECT SUBDATE("2025-1-24",INTERVAL 5 DAY);//output:2025-01-19
+*SELECT MAKEDATE(2025,311);//output:2025-11-07   (year,year er tomo din)
+*SELECT DAYNAME("2025-1-24");//output:Friday
+*SELECT MONTHNAME("2025-1-24");//output:January
+
+*SELECT DOB,DAYNAME(DOB)//DOB hocche column name
+FROM student_details;
+
+
+
+
+
+
+
