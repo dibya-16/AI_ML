@@ -1,5 +1,0 @@
-;/*FB_PKG_DELIM*/
-
-__d("CometCopyrightEnforcementRootQuery_facebookRelayOperation",[],(function(t,n,r,o,a,i){a.exports="27740500292276900"}),null);
-__d("CometCopyrightEnforcementRootQuery$Parameters",["CometCopyrightEnforcementRootQuery_facebookRelayOperation"],(function(t,n,r,o,a,i){"use strict";var e={kind:"PreloadableConcreteRequest",params:{id:n("CometCopyrightEnforcementRootQuery_facebookRelayOperation"),metadata:{},name:"CometCopyrightEnforcementRootQuery",operationKind:"query",text:null}};a.exports=e}),null);
-__d("CometCopyrightEnforcementRoot.entrypoint",["CometCopyrightEnforcementRootQuery$Parameters","JSResourceForInteraction"],(function(t,n,r,o,a,i,l){"use strict";var e={getPreloadProps:function(t){var e,n=t.routeProps,o=(e=n==null?void 0:n.ugcId)!=null?e:null;return{extraProps:{ugcId:o},queries:babelHelpers.extends({},o!=null?{enforcedUgcQuery:{parameters:r("CometCopyrightEnforcementRootQuery$Parameters"),variables:{ugcId:o}}}:{})}},root:r("JSResourceForInteraction")("CometCopyrightEnforcementRoot.react").__setRef("CometCopyrightEnforcementRoot.entrypoint")},s=e;l.default=s}),98);
