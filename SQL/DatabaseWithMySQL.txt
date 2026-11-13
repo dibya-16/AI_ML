@@ -1,7 +1,9 @@
+
+
 ***MySQL:
 SQL-Structured Query Language
 DDL(Data Definition Language)-CREATE,ALTER,DROP
-DML(Data Manupulation Language)-INSERT,SELECT,UPDATE,DELETE
+DML(Data Manipulation Language)-INSERT,SELECT,UPDATE,DELETE
 
 *SHOW DATABASES;
 *CREATE DATABASE college;
